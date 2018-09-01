@@ -1,2 +1,3 @@
 # XCI_Builder
-Files to be uploaded soon.
+Functional but still making changes
+Not download yet
