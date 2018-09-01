@@ -1,7 +1,6 @@
 # XCI_Builder
-Made by JulesOnTheRoad and first released in elotrolado.net
-
 https://github.com/julesontheroad/XCI_Builder
+Made by JulesOnTheRoad and first released in elotrolado.net
 First official git release
 ---------------
 0. Changelog
