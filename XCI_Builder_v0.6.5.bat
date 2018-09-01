@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 color 03
 
-::XCI_Builder v0.6.4 by julesontheroad::
+::XCI_Builder v0.6.5 by julesontheroad::
 ::A batch file made to automate nsp to xci files conversion via hacbuild
 ::XCI_Builder serves as a workflow helper for hacbuild, hactool and nspbuild
 ::Just drag and drop. Drag a nsp file into XCI_Builder .bat and it'll take care of everything
