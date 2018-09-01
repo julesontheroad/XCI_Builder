@@ -7,33 +7,44 @@ First official git release
 0. Changelog
 ---------------
 v0.5.0 - First launch in elotrolado.net
+
 v0.5.1 - v0.5.5.1 - Little fixes
+
 v0.6.5 - Lot of changes made to previous version:
+
   I - Added compatibility with games with more than 5 nca. (Games that include an html manual) 
 	The manual was stripped from the game, this doesn't impede game execution. And game is fully functional.
 	If you try to access the manual in these kind of games this action won't get any result and you will be able to keep playing.
 	Games are fully funtional without manual nca and there are few games that includes it to begin with.
+	
    II - Output route was moved to "output_xcib" so everything is better organiced XCI_Builder can be in the same folder as NX-Trimmer, 
 	which now uses el usará "output_nxt" as output folder.
+	
   III - Reformed ztools folder, erasing not needed files. 
-   IV - Little mod to hacbuild.exe so it takes "xci_header_key" from ztools. "xci_header_key" it's actually not needed everything works without it 
-	but hacbuild gives a warning wich was ugly for the batch output
+  
+   IV - Little mod to hacbuild.exe so it takes "xci_header_key" from ztools. "xci_header_key" it's actually not needed everything works without it but hacbuild gives a warning wich was ugly for the batch output 
+   
    V  - Added template for keys.txt and header_key.txt in ztools
+   
    VI - Added tag system for the files output. It goes as follows:
 	a) Se eliminan las tags [] de los ficheros. Para eliminar cosas como trimmed.
         b) Se eliminan los caracteres _ (más que nada porque no me gusta como quedan)
 	c) Se añade las siguientes tags a la salida.
 	   [xcib] xci converted with XCI_Builder
 	   [nm] "no manual", manual was erased to get the resulting xci to work
-	   [lc] In output nsp refers to the small nsp needed to get the xci to work.
+	   [lc] In output nsp refers to the small nsp needed to get the xci to work.  
+	   
   VII - Added options in batch header. Edit with notepad++ to select them
+  
    a)  "preservemanual" By default 0. Set at 1 if you want the manual nca to not be deleted. If set at 1 the manual will be sent to output folder.
 	NOTE1: Is advised to ¡¡NOT INSTALLED the manual .nca!! as the game will give error if you try to access the game manual.
 	NOTE2: The xci without manual is completely functional and if manual is selected it won't happened anything. 
 	NOTE3: This option is thought for a future xci to nsp converter that will revert the process.
+	
    b)  "delete_brack_tags" Erase [] tags like [trimmed]- By default at 1
+   
    c)  "delete_pa_tags" Erase tags () like (USA) - By default at 0. If activated it could also erase [] tags
-
+	 
 NOTE: If upgrading from previous version replace ztools folder hactool version was upgraded and an small modification was made in hacbuild code.
 
 ---------------
@@ -42,16 +53,24 @@ NOTE: If upgrading from previous version replace ztools folder hactool version w
 This tool is thought to clean the update partition from xci files and to reduce the padding used between partitions.
 This is a batch application which serves to automate the workflow between the following programs:
 a.) hacbuild: Program meant to create xci files from nca files, made by LucaFraga.
+
 https://github.com/LucaFraga/hacbuild
+
 b.) hactool: Program which function is give information, decrypt and extract a lot of different kind of files us by the NX System.
 Hactool was made by SciresM
+
 https://github.com/SciresM/hactool
+
 c.) nspBuild: Program meant to create nsp files from nca files. 
 nspBuild was made by CVFireDragon
+
 https://github.com/CVFireDragon/nspBuild
+
 NX-Trimmer was also inspired by "A Simple XCI, NCA, NSP Extracting Batch file (Just Drag and Drop) with Titlekey decrypt"
 by Bigjokker and published in gbatemp:
+
 https://gbatemp.net/threads/a-simple-xci-nca-nsp-extracting-batch-file-just-drag-and-drop-with-titlekey-decrypt.513300/
+
 ---------------
 2. Requirements
 ---------------
@@ -88,20 +107,29 @@ f.) The symbol "!" gives error when passed to hacbuild. So rename snipperclips f
 5. Use of the application
 -----------------------
 I.-   First fill "keys.txt" in ztools folder so hactool can work properly.
+
       More info: https://github.com/SciresM/hactool
+			
 II.-  Optionally fill the file header_key.txt in ztools with xci_header_key value
+
 III.- To convert a nsp to xci dragg the nsp file over "XCI_Builder_v0.6.x.bat" and wait for the system window to close
+
 IV.-  You'll get a folder with the name of the game in the output folder. Inside you'll find two files.
       - "game"[xcib].xci -> Converted nsp
       - "game"[lc].nsp -> License file to ge titlekey in the system.
+			
 V.-  For game_info.ini you can edit the preset or give it as it is. I'm getting 100% compatibility as it is.
+
 VI.- Install file [lc].nsp with SX OS custom installer or older tinfoil versions
+
 VII. - Load the xci file and enjoy
+
 ------------------
 6. Compatibility
 ------------------
 With current changes and accepting the described limitations this method should be compatible with all current xci files.
 At least I didn't find any issues.
+
 ------------------------
 7. Thanks and credits to 
 ------------------------
