@@ -51,7 +51,7 @@ NOTE: If upgrading from previous version replace ztools folder hactool version w
 ---------------
 1. Description
 ---------------
-This tool is thought to clean the update partition from xci files and to reduce the padding used between partitions.
+This tool is meant to clean the update partition from xci files and to reduce the padding used between partitions.
 This is a batch application which serves to automate the workflow between the following programs:
 a.) hacbuild: Program meant to create xci files from nca files, made by LucaFraga.
 
