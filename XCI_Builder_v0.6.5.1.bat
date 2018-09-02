@@ -351,6 +351,7 @@ if exist  nspDecrypted\licencia\*.cnmt.xml goto nspwithxml
 if exist  nspDecrypted\licencia\*.tik goto nspwithoutxml
 goto createxci
 :nspwithxml
+if not exist  nspDecrypted\licencia\*.tik goto createxci
 "%~dp0\ztools\nspbuild.py" "%~dp0\nspDecrypted\!ofolder![lc].nsp" "%~dp0\nspDecrypted\licencia\%varlist1%" "%~dp0\nspDecrypted\licencia\%varlist2%" "%~dp0\nspDecrypted\licencia\%varlist3%" "%~dp0\nspDecrypted\licencia\%varlist4%"
 del nspDecrypted\fileslist.txt
 rmdir /s /q "%~dp0\nspDecrypted\licencia"
