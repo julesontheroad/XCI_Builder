@@ -1,4 +1,4 @@
-# XCI_Builder v0.6.5
+# XCI_Builder v0.6.5.2
 https://github.com/julesontheroad/XCI_Builder
 
 Made by JulesOnTheRoad and first released in elotrolado.net
@@ -7,9 +7,7 @@ First official git release
 ---------------
 0. Changelog
 ---------------
-v0.5.0 - First launch in elotrolado.net
-
-v0.5.1 - v0.5.5.1 - Little fixes
+v0.6.5.2 - Little fix. Line added to prevent [lc].nsp generation in ticketless nsp files (custom nsp files).
 
 v0.6.5 - Lot of changes made to previous version:
 
@@ -47,6 +45,10 @@ v0.6.5 - Lot of changes made to previous version:
    c)  "delete_pa_tags" Erase tags () like (USA) - By default at 0. If activated it could also erase [] tags
 	 
 NOTE: If upgrading from previous version replace ztools folder hactool version was upgraded and an small modification was made in hacbuild code.
+
+v0.5.1 - v0.5.5.1 - Little fixes
+
+v0.5.0 - First launch in elotrolado.net
 
 ---------------
 1. Description
