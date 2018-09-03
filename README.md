@@ -7,6 +7,10 @@ First official git release
 ---------------
 0. Changelog
 ---------------
+
+REV2   - Changed ztools folder to erase sfk.exe as it wasn't needed. Added Bigjokker build of hacbuild so it eliminate the warning about not having a header_key.txt in hacbuild as it wasn't needed.
+Returned to previous build of hactool used since the prebuild one from SciresM seemed to give issues to some users with 32bit systems.
+
 v0.6.5.2 - Little fix. Line added to prevent [lc].nsp generation in ticketless nsp files (custom nsp files).
 
 v0.6.5 - Lot of changes made to previous version:
