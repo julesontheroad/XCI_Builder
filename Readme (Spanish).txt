@@ -1,13 +1,18 @@
 ***********
-XCI BUILDER (v0.6.4)
+XCI BUILDER (v0.6.5.2 REV2))
 ***********
 Elaborado por JulesOnTheRoad para elotrolado.net
 ---------------
 0. Changelog
 ---------------
-v0.5.0 - Lanzamiento inicial
-v0.5.1 - v0.5.5.1 - Pequeñas correcciones
-v0.6.4 - Realizados bastantes cambios desde la versión inicial. Los cuáles se detallan a continuación:
+
+REV2   - Reformada carpeta ztools para eliminar sfk.exe ya que no era necesario. Añadida la build de Bigjokker de hacbuild para eliminar la advertencia de falta de 
+         header_key.txt en hacbuild, ya que esta clave no es realmente necesaria. 
+         Se ha vuelto a la anterior build de hactool en lugar de la prebuild publicada por SciresM ya que parecía dar problemas a usuarios de sistemas 32bits.
+	 En caso de necesitar la build de SciresM https://github.com/SciresM/hactool/releases/tag/1.2.0
+
+v0.6.5.2 - Pequeño arreglo. Línea añadida para prevenir la generación de [lc].nsp en archivos sin ticket (archivos custom nsp).
+v0.6.5 - Realizados bastantes cambios desde la versión inicial. Los cuáles se detallan a continuación:
   I - Añadida compatibilidad con juegos con más de 5 nca. (Juegos con manual en html) En estos se ha decidido eliminar 
       el manual del juego, lo cuál no impide su ejecución. 
 	  El intento de acceder al manual desde los juegos que lo incluyen resulta en una acción que no da lugar a ningún 
@@ -28,6 +33,9 @@ v0.6.4 - Realizados bastantes cambios desde la versión inicial. Los cuáles se de
 
 NOTA: Si se viene de una versión anterior sustituir las aplicaciones de ztools. Se ha actualizado hactool y se ha realizado una pequeña 
       modificación en hacbuild.
+
+v0.5.1 - v0.5.5.1 - Pequeñas correcciones
+v0.5.0 - Lanzamiento inicial
 
 ---------------
 1. Descripción
