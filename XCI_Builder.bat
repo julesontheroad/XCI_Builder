@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 color 03
 
-::XCI_Builder v0.6.5.2 by julesontheroad::
+::XCI_Builder v0.7 by julesontheroad::
 ::A batch file made to automate nsp to xci files conversion via hacbuild
 ::XCI_Builder serves as a workflow helper for hacbuild, hactool and nspbuild
 ::Just drag and drop. Drag a nsp file into XCI_Builder .bat and it'll take care of everything
@@ -30,30 +30,54 @@ set /a preservemanual=0
 set /a delete_brack_tags=1
 set /a delete_pa_tags=0
 
+
+CD /d "%~dp0"
+if not exist "ztools" goto iztools
 ::check for keys.txt
-if not exist "%~dp0\ztools\keys.txt" echo Falta archivo "KEYS.txt" o "keys.txt!"
+if not exist "ztools\keys.txt" echo Missing file "KEYS.txt" or "keys.txt!"
 echo.
-if not exist "%~dp0\ztools\keys.txt" pause
-if not exist "%~dp0\ztools\keys.txt" exit
+if not exist "ztools\keys.txt" pause
+if not exist "ztools\keys.txt" exit
+goto startpr
+
+:iztools
+CD /d ".."
+if not exist "ztools\keys.txt" echo Missing file "KEYS.txt" or "keys.txt!"
+echo.
+if not exist "ztools\keys.txt" pause
+if not exist "ztools\keys.txt" exit
+goto startpr
+
+:startpr
 
 ::Set working folder and file
 set file=%~n1
 FOR %%i IN ("%file%") DO (
 set filename=%%~ni
 )
-CD /d "%~dp0"
 cls
 
 
 if "%~x1"==".nsp" (goto nsp)
-if "%~x1"==".xci" (goto xci)
+if "%~x1"==".xci" (goto end)
+goto end 
+ECHO -------------------------------------------
+ECHO ====== XCI_BUILDER BY JULESONTHEROAD ====== 
+ECHO -------------------------------------------
+ECHO "             VERSION 0.7                 "
+ECHO more in: https://github.com/julesontheroad/
+echo.
+ECHO ............
+ECHO INSTRUCTIONS
+ECHO ............
+echo.
 echo This program works dragging an nsp file over it's bat file
 echo.
-echo It also works with XCI_Builder_v0.6.4.bat "filename.nsp" over the command line
+echo It also works with XCI_Builder.bat "filename.nsp" over the command line
 echo.
 echo It's function is to convert nsp files to xci files
 echo.
-echo.Remember, you'll need to install the small _lc.nsp to get your .xci working in SX OS
+echo.Remember, you'll need to install the small [lc].nsp to get your .xci working in SX OS
 echo.
 echo.You can install this less than 1mb file with SX OS custom installer
 echo.
@@ -62,20 +86,10 @@ echo.
 pause
 exit
 
-
-
-:xci
-MD game_info
-if exist "game_info\!filename!.ini" del "game_info\!filename!.ini"
-"%~dp0\ztools\hacbuild.exe" read xci "%~f1"
-move  "%~dp1\*.ini"  "%~dp0\game_info\" 
-
-exit
-
 :nsp
 @echo off
 setlocal enabledelayedexpansion
-if exist "%~dp0\nspDecrypted\" rmdir /s /q "%~dp0\nspDecrypted\"
+if exist "nspDecrypted\" rmdir /s /q "nspDecrypted\"
 MD nspDecrypted
 
 :: If activated remove identifiers [] or () in filename.
@@ -101,18 +115,28 @@ if exist nspDecrypted\fname.txt del nspDecrypted\fname.txt
 ::I also wanted to remove_(
 set filename=%filename:_= %
 
-if exist "%~dp0\output_xcib\!filename!" RD /s /q "%~dp0\output_xcib\!filename!"
-
-set ofolder=%filename%
-
+ECHO -------------------------------------------
+ECHO ====== XCI_BUILDER BY JULESONTHEROAD ====== 
+ECHO -------------------------------------------
+ECHO "             VERSION 0.7                 "
+ECHO more in: https://github.com/julesontheroad/
+PING -n 2 127.0.0.1 >NUL 2>&1
 echo STARTING PROCESS... 
+echo PROCESSING  !filename!
 echo Please wait till window closes
 echo Depending on file size it can take a little
+PING -n 2 127.0.0.1 >NUL 2>&1
+
+if exist "output_xcib\!filename!" RD /s /q "output_xcib\!filename!" >NUL 2>&1
+set ofolder=%filename%
 ::Extract nsp to rawsecure
-"%~dp0\ztools\hactool.exe" -k "%~dp0\ztools\keys.txt" -t pfs0 --pfs0dir=nspDecrypted\rawsecure "%~1" > nspDecrypted/log_hactool.txt
+echo ----------------------------------------------------
+echo Extracting nsp file with hactool by SciresM
+echo ----------------------------------------------------
+"ztools\hactool.exe" -k "ztools\keys.txt" -t pfs0 --pfs0dir=nspDecrypted\rawsecure "%~1" >NUL 2>&1
+echo DONE
 ::Delete .jpg files if BBB dump
-if exist nspDecrypted\rawsecure\*.jpg del nspDecrypted\rawsecure\*.jpg
-del log_hactool.txt
+if exist nspDecrypted\rawsecure\*.jpg del nspDecrypted\rawsecure\*.jpg >NUL 2>&1
 ::List .nca files in directory
 dir nspDecrypted\rawsecure\*.nca > nspDecrypted\lisfiles.txt
 FINDSTR /I ".nca" "nspDecrypted\lisfiles.txt">nspDecrypted\nca_list.txt
@@ -211,7 +235,7 @@ Set "skip=%gstring%"
 for /f %%a in (nspDecrypted\ncatocheck.txt) do (
     set ncatocheck=%%a
 )
-"%~dp0\ztools\hactool.exe" -k "%~dp0\ztools\keys.txt" -t nca -i "nspDecrypted\rawsecure\%ncatocheck%" >"nspDecrypted\nca_data.txt"
+"ztools\hactool.exe" -k "ztools\keys.txt" -t nca -i "nspDecrypted\rawsecure\%ncatocheck%" >"nspDecrypted\nca_data.txt"
 FINDSTR "Type" nspDecrypted\nca_data.txt >nspDecrypted\nca_helper.txt
 for /f "tokens=3* delims=: " %%a in (nspDecrypted\nca_helper.txt) do (
 echo %%a>>nspDecrypted\nca_helper2.txt)
@@ -244,8 +268,8 @@ for /f %%a in (nspDecrypted\manual_list.txt) do (
 ::del manual_list.txt
 
 ::Set complete route
-set f_tmanual1="%~dp0\nspDecrypted\rawsecure\%tmanual1%"
-set f_tmanual2="%~dp0\nspDecrypted\rawsecure\%tmanual2%"
+set f_tmanual1="nspDecrypted\rawsecure\%tmanual1%"
+set f_tmanual2="nspDecrypted\rawsecure\%tmanual2%"
 
 ::Get size of both nca
 for /f "usebackq" %%A in ('%f_tmanual1%') do set size_tm1=%%~zA
@@ -307,7 +331,7 @@ Set "skip=%gstring%"
 for /f %%a in (nspDecrypted\ncatocheck.txt) do (
     set ncatocheck=%%a
 )
-"%~dp0\ztools\hactool.exe" -k "%~dp0\ztools\keys.txt" -t nca -i "nspDecrypted\rawsecure\%ncatocheck%" >"nspDecrypted\nca_data.txt"
+"ztools\hactool.exe" -k "ztools\keys.txt" -t nca -i "nspDecrypted\rawsecure\%ncatocheck%" >"nspDecrypted\nca_data.txt"
 FINDSTR "Type" nspDecrypted\nca_data.txt >nspDecrypted\nca_helper.txt
 for /f "tokens=3* delims=: " %%a in (nspDecrypted\nca_helper.txt) do (
 echo %%a>>nspDecrypted\nca_helper2.txt)
@@ -329,66 +353,82 @@ del nspDecrypted\nca_helper2.txt
 del nspDecrypted\nca_type.txt
 goto nsp_notproper_nm
 
-
 :lcnsp
 del nspDecrypted\*.txt
-if exist "nspDecrypted\licencia" RD /S /Q "nspDecrypted\licencia"
+if exist "nspDecrypted\licencia" RD /S /Q "nspDecrypted\licencia" >NUL 2>&1
 MD nspDecrypted\licencia
-echo f | xcopy /f /y "nspDecrypted\rawsecure\%myctrlnca%" "nspDecrypted\licencia\"
-move  "nspDecrypted\rawsecure\*.cnmt.xml"  "nspDecrypted\licencia" 
-move  "nspDecrypted\rawsecure\*.tik"  "nspDecrypted\licencia" 
-move  "nspDecrypted\rawsecure\*.cert"  "nspDecrypted\licencia" 
+echo f | xcopy /f /y "nspDecrypted\rawsecure\%myctrlnca%" "nspDecrypted\licencia\"  >NUL 2>&1
+move "nspDecrypted\rawsecure\*.cnmt.xml"  "nspDecrypted\licencia"  >NUL 2>&1
+move "nspDecrypted\rawsecure\*.tik"  "nspDecrypted\licencia"  >NUL 2>&1
+move "nspDecrypted\rawsecure\*.cert"  "nspDecrypted\licencia"  >NUL 2>&1
 
-dir "%~dp0\nspDecrypted\licencia" /b  > "%~dp0\nspDecrypted\fileslist.txt"
+dir "nspDecrypted\licencia" /b  > "nspDecrypted\fileslist.txt"
 set list=0
 for /F "tokens=*" %%A in (nspDecrypted\fileslist.txt) do (
     SET /A list=!list! + 1
     set varlist!list!=%%A
-)
-set varlist
+) >NUL 2>&1
+set varlist >NUL 2>&1
 
-if exist  nspDecrypted\licencia\*.cnmt.xml goto nspwithxml
-if exist  nspDecrypted\licencia\*.tik goto nspwithoutxml
+if exist nspDecrypted\licencia\*.cnmt.xml goto nspwithxml
+if exist nspDecrypted\licencia\*.tik goto nspwithoutxml
 goto createxci
 :nspwithxml
-if not exist  nspDecrypted\licencia\*.tik goto createxci
-"%~dp0\ztools\nspbuild.py" "%~dp0\nspDecrypted\!ofolder![lc].nsp" "%~dp0\nspDecrypted\licencia\%varlist1%" "%~dp0\nspDecrypted\licencia\%varlist2%" "%~dp0\nspDecrypted\licencia\%varlist3%" "%~dp0\nspDecrypted\licencia\%varlist4%"
+if not exist nspDecrypted\licencia\*.tik goto createxci
+echo ----------------------------------------------------
+echo Building license nsp with "nspbuild" by CVFireDragon
+echo ----------------------------------------------------
+"ztools\nspbuild.py" "nspDecrypted\!ofolder![lc].nsp" "nspDecrypted\licencia\%varlist1%" "nspDecrypted\licencia\%varlist2%" "nspDecrypted\licencia\%varlist3%" "nspDecrypted\licencia\%varlist4%"  >NUL 2>&1
+echo DONE
 del nspDecrypted\fileslist.txt
-rmdir /s /q "%~dp0\nspDecrypted\licencia"
+rmdir /s /q "nspDecrypted\licencia"
 goto createxci
 :nspwithoutxml
-"%~dp0\ztools\nspbuild.py" "%~dp0\nspDecrypted\!ofolder![lc].nsp" "%~dp0\nspDecrypted\licencia\%varlist1%" "%~dp0\nspDecrypted\licencia\%varlist2%" "%~dp0\nspDecrypted\licencia\%varlist3%"
+echo ----------------------------------------------------
+echo Building license nsp with "nspbuild" by CVFireDragon
+echo ----------------------------------------------------
+"ztools\nspbuild.py" "nspDecrypted\!ofolder![lc].nsp" "nspDecrypted\licencia\%varlist1%" "nspDecrypted\licencia\%varlist2%" "nspDecrypted\licencia\%varlist3%"  >NUL 2>&1
+echo DONE
 del nspDecrypted\fileslist.txt
-rmdir /s /q "%~dp0\nspDecrypted\licencia"
+rmdir /s /q "nspDecrypted\licencia"
 goto createxci
 
 ::Pass everything to hacbuild
 :createxci
-del nspDecrypted\rawsecure\*.tik
-del nspDecrypted\rawsecure\*.xml
-del nspDecrypted\rawsecure\*.cert
-del nspDecrypted\*.txt
-if exist nspDecrypted\rawsecure\*.jpg del nspDecrypted\rawsecure\*.jpg
-if exist nspDecrypted\secure RD /S /Q nspDecrypted\secure\
+del nspDecrypted\rawsecure\*.tik >NUL 2>&1
+del nspDecrypted\rawsecure\*.xml >NUL 2>&1
+del nspDecrypted\rawsecure\*.cert >NUL 2>&1
+del nspDecrypted\*.txt >NUL 2>&1
+if exist nspDecrypted\rawsecure\*.jpg del nspDecrypted\rawsecure\*.jpg >NUL 2>&1
+if exist nspDecrypted\secure RD /S /Q nspDecrypted\secure\ >NUL 2>&1
 MD nspDecrypted\secure
-echo f | xcopy /f /y "game_info_preset.ini" "nspDecrypted\"
-RENAME nspDecrypted\game_info_preset.ini ""game_info.ini"
-move  "%~dp0\nspDecrypted\rawsecure\*.nca"  "%~dp0\nspDecrypted\secure\" 
+echo f | xcopy /f /y "game_info_preset.ini" "nspDecrypted\"  >NUL 2>&1
+RENAME "nspDecrypted\game_info_preset.ini" "game_info.ini"
+move  "nspDecrypted\rawsecure\*.nca"  "nspDecrypted\secure\"  >NUL 2>&1
 RD /S /Q nspDecrypted\rawsecure\
 MD nspDecrypted\normal
 MD nspDecrypted\update
-
-"%~dp0\ztools\hacbuild.exe" xci_auto "%~dp0\nspDecrypted"  "%~dp0\nspDecrypted\!filename![xcib].xci" 
-RD /S /Q "%~dp0\nspDecrypted\secure"
-RD /S /Q "%~dp0\nspDecrypted\normal"
-RD /S /Q "%~dp0\nspDecrypted\update"
-del "%~dp0\nspDecrypted\game_info.ini"
-MD "%~dp0\output_xcib\!ofolder!"
-move  "%~dp0\nspDecrypted\*.*"  "%~dp0\output_xcib\!ofolder!" 
-rmdir /s /q "%~dp0\nspDecrypted"
-
-echo Process finished
+echo ----------------------------------------------
+echo Building xci file with hacbuild by LucaFraga
+echo ----------------------------------------------
+ECHO NOTE:
+echo With files bigger than 4Gb it'll take more time proportionally than with smaller files.
+echo Also you'll need to have at least double the amount of free disk space than file's size.
+echo IF YOU DON'T SEE "DONE" HACBUILD IS STILL AT WORK.
+ECHO ........................................................................................
+"ztools\hacbuild.exe" xci_auto "nspDecrypted"  "nspDecrypted\!filename![xcib].xci"  >NUL 2>&1
+echo DONE
+RD /S /Q "nspDecrypted\secure"
+RD /S /Q "nspDecrypted\normal"
+RD /S /Q "nspDecrypted\update"
+del "nspDecrypted\game_info.ini"
+MD "output_xcib\!ofolder!" >NUL 2>&1
+move  "nspDecrypted\*.*"  "output_xcib\!ofolder!"  >NUL 2>&1
+RD /S /Q "nspDecrypted"
+echo ----------------------------------------------
+echo Processed !filename!
 echo Your files should be in the output_xcib folder
+echo ----------------------------------------------
 PING -n 4 127.0.0.1 >NUL 2>&1
 echo    /@
 echo    \ \
@@ -399,8 +439,9 @@ echo (____@)   \
 echo (__o)_    \
 echo       \    \
 
+:end
 PING -n 2 127.0.0.1 >NUL 2>&1
-exit
+cls
 
 
 
