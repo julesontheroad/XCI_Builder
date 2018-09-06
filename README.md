@@ -9,9 +9,7 @@ First official git release
 ---------------
 
 v0.7   - Cleaned echos giving better input to the user about the process.
-
          Added compatibility with XCI_BatchBuilder.
-	 
 	 Erased auto-exit at the end of program so it can be used by command line if you want.
 
 v0.6.5.2 REV 2 - Changed ztools folder to erase sfk.exe as it wasn't needed. Added Bigjokker build of hacbuild so it eliminate the warning about not having a header_key.txt in hacbuild as it wasn't needed.
