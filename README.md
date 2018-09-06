@@ -61,8 +61,9 @@ v0.5.0 - First launch in elotrolado.net
 ---------------
 1. Description
 ---------------
-This tool is meant to clean the update partition from xci files and to reduce the padding used between partitions.
+This tool purpose is to convert nsp files to xci files.
 This is a batch application which serves to automate the workflow between the following programs:
+
 a.) hacbuild: Program meant to create xci files from nca files, made by LucaFraga.
 
 https://github.com/LucaFraga/hacbuild
