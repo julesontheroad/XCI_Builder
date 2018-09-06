@@ -1,13 +1,18 @@
 ***********
-XCI BUILDER (v0.6.5.2 REV2))
+XCI BUILDER (v0.7)
 ***********
 Elaborado por JulesOnTheRoad para elotrolado.net
+https://github.com/julesontheroad/XCI_Builder
 ---------------
 0. Changelog
 ---------------
+v0.7   - Limpiados echos, dando al usuario un mejor entendimiento del proceso
+         Añadida compatibilidad con XCI_BatchBuilder.
+         Eliminado auto-exit al final del programa para que pueda ser usado por línea de comandos.
+	 Realizados un par de arreglos en el código.
 
-REV2   - Reformada carpeta ztools para eliminar sfk.exe ya que no era necesario. Añadida la build de Bigjokker de hacbuild para eliminar la advertencia de falta de 
-         header_key.txt en hacbuild, ya que esta clave no es realmente necesaria. 
+v0.6.5.2- Reformada carpeta ztools para eliminar sfk.exe ya que no era necesario. Añadida la build de Bigjokker de hacbuild para eliminar la advertencia de falta de 
+REV2     header_key.txt en hacbuild, ya que esta clave no es realmente necesaria. 
          Se ha vuelto a la anterior build de hactool en lugar de la prebuild publicada por SciresM ya que parecía dar problemas a usuarios de sistemas 32bits.
 	 En caso de necesitar la build de SciresM https://github.com/SciresM/hactool/releases/tag/1.2.0
 
@@ -110,5 +115,6 @@ Al menos yo no he encontrado incompatibilidades.
 --------------------
 7. Agradecimentos a: 
 --------------------
-LucaFraga, SciresM, CVFireDragon y a los miembros de gbatemp y  elotrolado.net
-
+LucaFraga, SciresM y CVFireDragon 
+Bigjokker de gbatemp por los consejos sobre como limpiar echos en archivos batch.
+A todos los miembros de gbatemp, elotrolado.net y a mis amigos de discord ;)
