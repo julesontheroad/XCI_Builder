@@ -1,11 +1,8 @@
 # XCI_Builder v0.7
 https://github.com/julesontheroad/XCI_Builder
-So for whatever that didn't realized it yet:
+So for whoever that didn't realized it yet:
 - For building xci files without the need of a ticket use: https://github.com/julesontheroad/NUT_BATCH_CLEANER/releases/tag/v0.41
 - For the trimmer and things without tickets for now use https://github.com/julesontheroad/NUT_BATCH_CLEANER/releases
-
-Made by JulesOnTheRoad and first released in elotrolado.net
-First official git release
 
 ---------------
 0. Changelog
